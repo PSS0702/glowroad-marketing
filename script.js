@@ -34,4 +34,26 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.classList.remove('active');
         }
     });
-}); 
+
+    // 이미지 지연 로딩
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    if ('loading' in HTMLImageElement.prototype) {
+        images.forEach(img => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+            }
+        });
+    } else {
+        // Fallback for browsers that don't support lazy loading
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+        document.body.appendChild(script);
+    }
+});
+
+// 성능 최적화
+document.addEventListener('scroll', function() {
+    requestAnimationFrame(function() {
+        // 스크롤 이벤트 최적화
+    });
+}, { passive: true }); 

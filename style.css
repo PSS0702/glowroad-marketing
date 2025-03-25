@@ -63,8 +63,9 @@ body {
 }
 
 .logo img {
-    height: 108px;
-    width: auto;
+    width: 120px;
+    height: 40px;
+    object-fit: contain;
     transition: transform 0.3s ease;
 }
 
@@ -251,6 +252,9 @@ body {
     justify-content: center;
     color: var(--white);
     text-align: center;
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
+    position: relative;
 }
 
 .hero::before {
@@ -284,16 +288,24 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 2;
+}
+
+.hero .company-name {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .hero h1 {
-    font-size: 3.2rem;
+    font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.4;
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     max-width: 600px;
     word-break: keep-all;
+    color: var(--white);
 }
 
 .hero p {
@@ -319,25 +331,23 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
+    gap: 12px;
     margin: 24px 0;
-    padding: 0 20px;
 }
 
 .service-tag {
-    font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 20px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 25px;
     background: rgba(255, 255, 255, 0.1);
-    word-break: keep-all;
     color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .service-tag:hover {
-    background: var(--primary-blue);
-    color: var(--white);
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
-    border-color: var(--primary-blue);
 }
 
 .cta-button {
@@ -383,6 +393,8 @@ body {
 .features {
     padding: 8rem 0;
     background-color: var(--white);
+    content-visibility: auto;
+    contain-intrinsic-size: 700px;
 }
 
 .section-title,
@@ -504,6 +516,8 @@ body {
     text-align: center;
     border-top: 2px solid var(--lighter-blue);
     border-bottom: 2px solid var(--lighter-blue);
+    content-visibility: auto;
+    contain-intrinsic-size: 700px;
 }
 
 .pain-points h2 {
@@ -602,8 +616,8 @@ body {
     
     .hero {
         background: var(--primary-blue);
-        min-height: auto;
-        padding: 80px 20px 40px;
+        min-height: 60vh;
+        padding: 100px 20px 60px;
     }
     
     .hero::before,
@@ -615,18 +629,23 @@ body {
         padding: 0;
     }
 
+    .hero .company-name {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
     .hero h1 {
-        font-size: 24px;
+        font-size: 2.4rem;
         line-height: 1.4;
-        margin-bottom: 16px;
-        padding: 0 20px;
+        margin-bottom: 1rem;
+        padding: 0;
     }
     
     .hero p {
-        font-size: 16px;
+        font-size: 1.2rem;
         line-height: 1.6;
-        margin-bottom: 24px;
-        padding: 0 20px;
+        margin-bottom: 1.5rem;
+        padding: 0;
     }
 
     .subtitle {
@@ -634,15 +653,14 @@ body {
     }
     
     .service-tags {
-        gap: 0.8rem;
+        gap: 8px;
         margin: 1.5rem 0;
         padding: 0 1rem;
     }
 
     .service-tag {
         font-size: 0.9rem;
-        padding: 0.6rem 1rem;
-        color: var(--white);
+        padding: 8px 16px;
     }
 
     .pain-points h2 {
@@ -2731,5 +2749,141 @@ section {
 
     .process-icon i {
         font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title::after,
+    .viral-title::after,
+    .place-title::after,
+    .process-title::after,
+    .pricing-title::after {
+        display: none;
+    }
+
+    .section-title,
+    .viral-title,
+    .place-title,
+    .process-title,
+    .pricing-title {
+        padding-bottom: 0;
+        margin-bottom: 1rem;
+    }
+    
+    /* 기존 코드 유지 */
+}
+
+@media (max-width: 480px) {
+    .section-title::after,
+    .viral-title::after,
+    .place-title::after,
+    .process-title::after,
+    .pricing-title::after {
+        display: none;
+    }
+
+    .section-title,
+    .viral-title,
+    .place-title,
+    .process-title,
+    .pricing-title {
+        padding-bottom: 0;
+        margin-bottom: 1rem;
+    }
+    
+    /* 기존 코드 유지 */
+}
+
+/* 고정 버튼 스타일 */
+.fixed-buttons {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.fixed-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    color: var(--white);
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.fixed-btn i {
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.fixed-btn span {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.fixed-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background: var(--light-blue);
+}
+
+.contact-fixed-btn {
+    background: var(--primary-blue);
+}
+
+.top-fixed-btn {
+    background: #333;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .fixed-buttons {
+        right: 15px;
+        bottom: 15px;
+        gap: 8px;
+    }
+
+    .fixed-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .fixed-btn i {
+        font-size: 18px;
+        margin-bottom: 1px;
+    }
+
+    .fixed-btn span {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fixed-buttons {
+        right: 10px;
+        bottom: 10px;
+        gap: 6px;
+    }
+
+    .fixed-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .fixed-btn i {
+        font-size: 16px;
+    }
+
+    .fixed-btn span {
+        font-size: 9px;
     }
 } 
