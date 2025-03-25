@@ -2844,7 +2844,6 @@ section {
     background: #333;
 }
 
-/* 모바일 대응 */
 @media (max-width: 768px) {
     .fixed-buttons {
         right: 15px;
