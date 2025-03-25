@@ -16,6 +16,11 @@
         <div class="logo">
             <a href="#"><img src="images/logo.png.png" alt="글로우로드"></a>
         </div>
+        <button class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="#home">HOME</a></li>
             <li><a href="#viral">카페/커뮤니티 바이럴</a></li>
@@ -23,9 +28,6 @@
             <li><a href="#seo">최적화 검색 마케팅</a></li>
             <li><a href="http://pf.kakao.com/_xaidxfn/chat" class="contact-btn">문의하기</a></li>
         </ul>
-        <button class="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
     </nav>
 
     <!-- 모바일 메뉴 -->
@@ -548,35 +550,6 @@
         </div>
     </section>
 
-    <script>
-        // 스크롤 이벤트 처리
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // 스무스 스크롤 구현
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // 모바일 메뉴 토글
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html> 
