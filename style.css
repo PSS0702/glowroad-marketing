@@ -244,54 +244,50 @@ body {
 
 /* 히어로 섹션 스타일 */
 .hero {
+    position: relative;
+    width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--primary-blue), #1e4b9f);
-    padding: 120px 0 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
-    text-align: center;
-    content-visibility: auto;
-    contain-intrinsic-size: 500px;
-    position: relative;
+    overflow: hidden;
 }
 
-.hero::before {
-    content: '';
+.video-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-    pointer-events: none;
+    z-index: 1;
 }
 
-.hero::after {
-    content: '';
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    transform: skewX(-15deg) translateX(50%);
-    backdrop-filter: blur(5px);
-}
-
-.hero-content {
+    left: 0;
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     z-index: 2;
 }
 
-.hero .company-name {
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 20px;
+    max-width: 1200px;
+}
+
+.hero-content .company-name {
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
     color: rgba(255, 255, 255, 0.9);
@@ -300,21 +296,53 @@ body {
 .hero h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    line-height: 1.4;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-    max-width: 600px;
-    word-break: keep-all;
-    color: var(--white);
+    line-height: 1.2;
 }
 
 .hero p {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     margin-bottom: 2rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 500px;
-    word-break: keep-all;
+}
+
+.hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.hero-tags .tag {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.hero-tags .tag:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-tags .tag {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
 }
 
 .subtitle {
