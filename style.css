@@ -318,10 +318,13 @@ body {
     border-radius: 25px;
     font-size: 0.9rem;
     transition: all 0.3s ease;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .hero-tags .tag:hover {
     background: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -2825,8 +2828,8 @@ section {
 /* 고정 버튼 스타일 */
 .fixed-buttons {
     position: fixed;
-    right: 20px;
     bottom: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -2841,35 +2844,62 @@ section {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: var(--primary-blue);
-    color: var(--white);
+    background-color: var(--primary-blue);
+    color: white;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
 .fixed-btn i {
-    font-size: 20px;
+    font-size: 1.5rem;
     margin-bottom: 2px;
 }
 
 .fixed-btn span {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 0.7rem;
 }
 
 .fixed-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    background: var(--light-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.top-fixed-btn {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.top-fixed-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .fixed-buttons {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .fixed-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .fixed-btn i {
+        font-size: 1.2rem;
+    }
+
+    .fixed-btn span {
+        font-size: 0.6rem;
+    }
 }
 
 .contact-fixed-btn {
     background: var(--primary-blue);
-}
-
-.top-fixed-btn {
-    background: #333;
 }
 
 @media (max-width: 768px) {

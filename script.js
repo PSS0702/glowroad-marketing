@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const navbar = document.querySelector('.navbar');
+    const body = document.body;
 
     // 햄버거 메뉴 버튼에 클릭 이벤트 추가
     mobileMenuBtn.addEventListener('click', function() {
         this.classList.toggle('active');
         mobileMenu.classList.toggle('active');
+        body.classList.toggle('menu-open');
     });
 
     // 메뉴 항목 클릭 시 메뉴 닫기
@@ -15,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function() {
             mobileMenuBtn.classList.remove('active');
             mobileMenu.classList.remove('active');
+            body.classList.remove('menu-open');
         });
     });
 
@@ -49,6 +52,40 @@ document.addEventListener('DOMContentLoaded', function() {
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
         document.body.appendChild(script);
     }
+
+    // 스크롤 이벤트 처리
+    const topButton = document.querySelector('.top-fixed-btn');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) {
+            topButton.classList.add('visible');
+        } else {
+            topButton.classList.remove('visible');
+        }
+    });
+
+    // 부드러운 스크롤 처리
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // 모바일 메뉴가 열려있다면 닫기
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    body.classList.remove('menu-open');
+                }
+            }
+        });
+    });
 });
 
 // 성능 최적화
