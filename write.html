@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글 작성 - 글로우로드 마케팅</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar" role="navigation" aria-label="메인 메뉴">
+        <div class="nav-content">
+            <a href="index.html" class="logo" aria-label="글로우로드 홈">
+                <img src="images/logo.png.png" alt="글로우로드 로고" width="120" height="40">
+            </a>
+            <ul class="nav-links">
+                <li><a href="blog.html">마케팅 인사이트</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 글쓰기 영역 -->
+    <main class="write-page">
+        <div class="write-container">
+            <form id="writeForm">
+                <!-- 제목 입력 -->
+                <div class="write-header">
+                    <input type="text" id="title" placeholder="제목을 입력하세요" required>
+                </div>
+
+                <!-- 에디터 툴바 -->
+                <div class="toolbar">
+                    <button type="button" data-command="bold">굵게</button>
+                    <button type="button" data-command="italic">기울임</button>
+                    <button type="button" data-command="underline">밑줄</button>
+                    <button type="button" data-command="insertOrderedList">번호 목록</button>
+                    <button type="button" data-command="insertUnorderedList">글머리 기호</button>
+                    <button type="button" data-command="h2">큰 제목</button>
+                    <button type="button" data-command="h3">작은 제목</button>
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none">
+                    <button type="button" onclick="document.getElementById('imageUpload').click()">이미지 삽입</button>
+                </div>
+
+                <!-- 에디터 본문 -->
+                <div id="editor" contenteditable="true" class="editor-content"></div>
+
+                <!-- 썸네일 업로드 -->
+                <div class="write-footer">
+                    <label for="thumbnail" class="thumbnail-label">
+                        <div class="thumbnail-preview">
+                            <span>썸네일 이미지 업로드</span>
+                        </div>
+                        <input type="file" id="thumbnail" accept="image/*" style="display: none">
+                    </label>
+
+                    <!-- 로딩 인디케이터 -->
+                    <div id="loadingIndicator" style="display: none;">
+                        저장 중...
+                    </div>
+
+                    <!-- 작성 버튼 -->
+                    <div class="write-actions">
+                        <button type="button" class="cancel-btn" onclick="location.href='blog.html'">취소</button>
+                        <button type="submit" class="submit-btn">발행하기</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="firebase-config.js"></script>
+    <script src="write.js"></script>
+</body>
+</html> 

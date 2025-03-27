@@ -94,56 +94,47 @@ body {
     }
 }
 
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 80px;
+}
+
 .nav-links {
     display: flex;
-    gap: 2.5rem;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    gap: 40px;
+    margin-left: auto;
     list-style: none;
 }
 
 .nav-links li a {
     color: #333;
     text-decoration: none;
-    font-size: 1rem;
     font-weight: 500;
-    padding: 0.5rem 0;
-    position: relative;
+    font-size: 16px;
     transition: color 0.3s ease;
 }
 
-.nav-links li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #1a75ff;
-    transition: width 0.3s ease;
-}
-
 .nav-links li a:hover {
-    color: #1a75ff;
-}
-
-.nav-links li a:hover::after {
-    width: 100%;
+    color: #007bff;
 }
 
 .nav-links li a.contact-btn {
-    background-color: #1a75ff;
+    background-color: #007bff;
     color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 30px;
-    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .nav-links li a.contact-btn:hover {
     background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
 .nav-links li a.contact-btn::after {
