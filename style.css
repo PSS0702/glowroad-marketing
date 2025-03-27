@@ -3139,84 +3139,136 @@ section {
 }
 
 .portfolio-item {
-    background: white;
-    border-radius: 15px;
+    background: var(--white);
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 40px;
 }
 
 .portfolio-item:hover {
     transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .portfolio-image {
     width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.portfolio-image img {
-    width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
 }
 
 .portfolio-content {
-    padding: 20px;
+    padding: 30px;
 }
 
 .portfolio-content h3 {
-    margin-bottom: 15px;
-    color: var(--text-color);
+    font-size: var(--font-size-2xl);
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-weight: 700;
 }
 
-.portfolio-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 15px;
+.metrics-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--lighter-blue);
+    border-radius: 15px;
 }
 
-.stat-item {
+.metric {
     text-align: center;
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 8px;
 }
 
-.stat-label {
+.metric-value {
     display: block;
-    font-size: 0.9em;
-    color: #666;
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--primary-blue);
     margin-bottom: 5px;
 }
 
-.stat-value {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: var(--primary-color);
+.metric-label {
+    font-size: var(--font-size-base);
+    color: var(--text-dark);
 }
 
 .portfolio-description {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+.testimonial {
+    background: var(--lighter-blue);
+    padding: 25px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.testimonial::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 60px;
+    color: var(--primary-blue);
+    opacity: 0.2;
+}
+
+.quote {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--text-dark);
     margin-bottom: 15px;
-    color: #666;
-}
-
-.client-review {
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.client-review p {
     font-style: italic;
-    margin-bottom: 10px;
 }
 
-.client-name {
-    color: var(--primary-color);
+.author {
+    font-size: var(--font-size-base);
+    color: var(--primary-blue);
     font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .portfolio-image {
+        height: 250px;
+    }
+
+    .portfolio-content {
+        padding: 20px;
+    }
+
+    .portfolio-content h3 {
+        font-size: var(--font-size-xl);
+    }
+
+    .metric-value {
+        font-size: var(--font-size-2xl);
+    }
+
+    .portfolio-description,
+    .quote {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-image {
+        height: 200px;
+    }
+
+    .metrics-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .metric {
+        margin-bottom: 15px;
+    }
 }
 
 /* 마케팅 프로세스 시각화 섹션 */
