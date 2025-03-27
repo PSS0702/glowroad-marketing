@@ -37,7 +37,6 @@
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#viral">카페/커뮤니티 바이럴</a></li>
                 <li><a href="#place">플레이스/스토어 마케팅</a></li>
-                <li><a href="#seo">최적화 검색 마케팅</a></li>
                 <li><a href="http://pf.kakao.com/_xaidxfn/chat" class="contact-btn">문의하기</a></li>
             </ul>
         </nav>
@@ -59,7 +58,6 @@
                 <div class="hero-tags">
                     <a href="#viral" class="tag"># 카페/커뮤니티 바이럴</a>
                     <a href="#place" class="tag"># 플레이스/스토어</a>
-                    <a href="#seo" class="tag"># 최적화 검색</a>
                     <a href="http://pf.kakao.com/_xaidxfn/chat" class="tag"># 상담문의</a>
                 </div>
             </div>
@@ -298,11 +296,15 @@
             </div>
         </section>
 
-        <!-- 카페/커뮤니티 바이럴 문의하기 -->
-        <section class="inquiry-section blue-bg">
-            <h2 class="inquiry-title">글로우로드 카페/커뮤니티 바이럴 문의하기</h2>
-            <a href="http://pf.kakao.com/_xaidxfn/chat" class="inquiry-button">문의하기</a>
-        </section>
+        <!-- 바이럴 마케팅 섹션 문의하기 -->
+        <div class="section-inquiry">
+            <div class="section-inquiry-content">
+                <h2>글로우로드 카페/커뮤니티 바이럴 문의하기</h2>
+                <a href="http://pf.kakao.com/_xaidxfn/chat" class="section-inquiry-btn">
+                    문의하기
+                </a>
+            </div>
+        </div>
 
         <!-- 플레이스/스토어 마케팅 섹션 -->
         <section id="place" class="service-section">
@@ -420,129 +422,74 @@
             </div>
         </section>
 
-        <!-- 플레이스/스토어 마케팅 문의하기 -->
-        <section class="inquiry-section blue-bg">
-            <h2 class="inquiry-title">글로우로드 플레이스/스토어 마케팅 문의하기</h2>
-            <a href="http://pf.kakao.com/_xaidxfn/chat" class="inquiry-button">문의하기</a>
-        </section>
+        <!-- 플레이스/스토어 마케팅 섹션 문의하기 -->
+        <div class="section-inquiry">
+            <div class="section-inquiry-content">
+                <h2>글로우로드 플레이스/스토어 마케팅 문의하기</h2>
+                <a href="http://pf.kakao.com/_xaidxfn/chat" class="section-inquiry-btn">
+                    문의하기
+                </a>
+            </div>
+        </div>
 
-        <!-- 최적화 검색 마케팅 섹션 -->
-        <section id="seo" class="service-section">
-            <div class="service-content">
-                <div class="seo-header">
-                    <h2 class="seo-title">최적화 검색 마케팅</h2>
-                    <p class="seo-subtitle">검색 시 효과적인 마케팅으로 비즈니스 성장을 도와드립니다.<br>검색량이 있는 키워드라면 어떤 업직종이든 효과적인 마케팅 솔루션을 제공합니다.</p>
+        <!-- 성과/포트폴리오 섹션 -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="section-content">
+                <h2 class="section-title">성공 사례</h2>
+                <div class="portfolio-filters">
+                    <button class="filter-btn active" data-filter="all">전체</button>
+                    <button class="filter-btn" data-filter="viral">카페/커뮤니티</button>
+                    <button class="filter-btn" data-filter="place">플레이스/스토어</button>
                 </div>
-                <div class="seo-examples">
-                    <div class="example-image full-width">
-                        <img src="images/seo-main.jpg" alt="검색 최적화 메인 이미지" class="example-img">
-                    </div>
-                    <div class="example-image horizontal">
-                        <img src="images/seo-cards.jpg" alt="검색 최적화 카드 이미지" class="example-img">
-                    </div>
-                </div>
-                <div class="seo-reasons">
-                    <div class="reason-card">
-                        <div class="reason-icon">
-                            <i class="fas fa-search"></i>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-category="viral">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio-placeholder.jpg" alt="성공 사례 1">
                         </div>
-                        <div class="reason-content">
-                            <h3>검색 마케팅</h3>
-                            <p>효과적인 위치에서 많은 트래픽을<br>유도합니다.</p>
-                        </div>
-                    </div>
-                    <div class="reason-card">
-                        <div class="reason-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="reason-content">
-                            <h3>효과적인 트래픽</h3>
-                            <p>적절한 위치에서 트래픽이 발생하여<br>매출로 전환이 가능합니다.</p>
-                        </div>
-                    </div>
-                    <div class="reason-card">
-                        <div class="reason-icon">
-                            <i class="fas fa-chart-pie"></i>
-                        </div>
-                        <div class="reason-content">
-                            <h3>키워드 검색량</h3>
-                            <p>검색량이 있는 키워드라면<br>꾸준히 결과를 만들어낼수 있습니다.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="process-section">
-                    <h2 class="process-title">최적화 검색 마케팅 진행 프로세스</h2>
-                    <div class="process-container">
-                        <div class="process-item">
-                            <div class="process-icon">
-                                <i class="fas fa-comments"></i>
-                            </div>
-                            <h3>상담</h3>
-                            <p>목표 키워드 및 업체의<br>상황을 파악 합니다.</p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <h3>키워드 분석</h3>
-                            <p>경쟁력 있는 키워드인지<br>분석 합니다.</p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-icon">
-                                <i class="fas fa-tasks"></i>
-                            </div>
-                            <h3>전략 수립</h3>
-                            <p>상단작업을 위한<br>전략을 수립 합니다.</p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-icon">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <h3>콘텐츠 발행 및 순위파악</h3>
-                            <p>실제 마케팅 작업이<br>들어갑니다.</p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3>순위체크</h3>
-                            <p>발행된 콘텐츠의<br>순위를 체크 합니다.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="pricing-section">
-                    <h2 class="pricing-title">최적화 검색 마케팅 비용안내</h2>
-                    <div class="pricing-container">
-                        <div class="pricing-card">
-                            <div class="pricing-header">
-                                <h3>검색 마케팅 관리상품</h3>
-                                <p>목표키워드를 효과적으로<br>관리하는 상품입니다.</p>
-                            </div>
-                            <div class="pricing-content">
-                                <div class="price-item">
-                                    <span class="quantity">월 관리</span>
-                                    <span class="price">문의요망</span>
+                        <div class="portfolio-content">
+                            <h3>카페 바이럴 마케팅 성공 사례</h3>
+                            <div class="portfolio-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">매출 증가</span>
+                                    <span class="stat-value">200%</span>
                                 </div>
-                                <div class="price-item">
-                                    <span class="quantity">건바이건</span>
-                                    <span class="price">문의요망</span>
+                                <div class="stat-item">
+                                    <span class="stat-label">방문자 증가</span>
+                                    <span class="stat-value">300%</span>
                                 </div>
-                                <p class="vat-notice">(VAT 별도)</p>
+                            </div>
+                            <p class="portfolio-description">카페의 특별한 메뉴와 분위기를 효과적으로 전달하여 매출과 방문자 수를 크게 증가시켰습니다.</p>
+                            <div class="client-review">
+                                <p>"예상보다 훨씬 좋은 결과를 얻었습니다. 특히 젊은 층의 방문이 크게 늘었어요."</p>
+                                <span class="client-name">- A카페 대표</span>
                             </div>
                         </div>
                     </div>
-                    <p class="pricing-notice">
-                        목표키워드의 검색량, 경쟁도 등을 종합하여 맞춤형 견적을 드립니다.<br>
-                        정확한 견적은 상담을 통해 안내드리고 있습니다.
-                    </p>
+                    <div class="portfolio-item" data-category="place">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio-placeholder.jpg" alt="성공 사례 2">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>스토어 플레이스 마케팅 성공 사례</h3>
+                            <div class="portfolio-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">예약 증가</span>
+                                    <span class="stat-value">150%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">리뷰 증가</span>
+                                    <span class="stat-value">250%</span>
+                                </div>
+                            </div>
+                            <p class="portfolio-description">스토어의 특별한 서비스와 분위기를 효과적으로 전달하여 예약과 리뷰를 크게 증가시켰습니다.</p>
+                            <div class="client-review">
+                                <p>"고객들의 리뷰가 크게 늘어나고, 예약도 자연스럽게 늘어났습니다."</p>
+                                <span class="client-name">- B스토어 대표</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <!-- 최적화 검색 마케팅 문의하기 -->
-        <section class="inquiry-section blue-bg">
-            <h2 class="inquiry-title">글로우로드 최적화 검색 마케팅 문의하기</h2>
-            <a href="http://pf.kakao.com/_xaidxfn/chat" class="inquiry-button">문의하기</a>
         </section>
 
         <!-- 문의하기 섹션 -->
@@ -567,7 +514,6 @@
             <li><a href="#home">HOME</a></li>
             <li><a href="#viral">카페/커뮤니티 바이럴</a></li>
             <li><a href="#place">플레이스/스토어 마케팅</a></li>
-            <li><a href="#seo">최적화 검색 마케팅</a></li>
             <li><a href="http://pf.kakao.com/_xaidxfn/chat">문의하기</a></li>
         </ul>
     </div>
