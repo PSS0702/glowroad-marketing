@@ -400,7 +400,8 @@ function updatePagination() {
 
 // 관리자 UI 표시 여부 확인
 function shouldShowAdminUI() {
-    return window.location.href.includes('admin');
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.has('admin');
 }
 
 // 관리자 UI 초기화
@@ -424,6 +425,7 @@ function initializeAdminUI() {
         }
         if (adminLoginBtn) {
             adminLoginBtn.textContent = isAdmin ? '로그아웃' : '관리자 로그인';
+            adminLoginBtn.onclick = isAdmin ? handleLogout : () => loginModal.style.display = 'flex';
         }
     });
 }
@@ -459,53 +461,36 @@ async function handleLogout() {
     }
 }
 
-// 이벤트 리스너 설정
-function setupEventListeners() {
-    // 이전 페이지 버튼
-    prevPageBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            loadPosts();
-        }
-    });
-
-    // 다음 페이지 버튼
-    nextPageBtn.addEventListener('click', () => {
-        const totalPages = Math.ceil(totalPosts / postsPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            loadPosts();
-        }
-    });
-
-    // 관리자 로그인 버튼
-    adminLoginBtn.addEventListener('click', () => {
-        if (!isAdmin) {
-            loginModal.style.display = 'flex';
-        } else {
-            handleLogout();
-        }
-    });
-
-    // 로그인 폼
-    loginForm.addEventListener('submit', handleLogin);
-
-    // 글쓰기 버튼
-    writeBtn.addEventListener('click', () => {
-        if (isAdmin) {
-            window.location.href = 'write.html';
-        } else {
-            alert('관리자로 로그인해주세요.');
-        }
-    });
-
-    // 모달 외부 클릭
-    window.addEventListener('click', (e) => {
-        if (e.target === loginModal) {
-            loginModal.style.display = 'none';
-        }
-    });
+// 글쓰기 버튼 클릭 핸들러
+function handleWriteClick() {
+    window.location.href = 'write.html?admin=true';
 }
+
+// 이벤트 리스너 설정
+document.addEventListener('DOMContentLoaded', () => {
+    initializeAdminUI();
+    loadPosts();
+
+    // 로그인 폼 이벤트 리스너
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+
+    // 글쓰기 버튼 이벤트 리스너
+    const writeBtn = document.getElementById('writeBtn');
+    if (writeBtn) {
+        writeBtn.addEventListener('click', handleWriteClick);
+    }
+
+    // 모달 닫기 버튼
+    const closeModal = document.querySelector('.close-modal');
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+    }
+});
 
 // 초기화
 function init() {
