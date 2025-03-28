@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마케팅 인사이트 - 글로우로드 마케팅</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ... existing styles ... */
+        
+        #writeButton {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            display: none; /* 기본적으로 숨김 */
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #writeButton:hover {
+            transform: scale(1.1);
+            background-color: #0056b3;
+        }
+
+        #writeButton i {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar" role="navigation" aria-label="메인 메뉴">
+        <div class="nav-content">
+            <a href="index.html" class="logo" aria-label="글로우로드 홈">
+                <img src="images/logo.png.png" alt="글로우로드 로고" width="120" height="40">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 블로그 헤더 -->
+    <header class="blog-header">
+        <div class="blog-header-content">
+            <h1>마케팅 인사이트</h1>
+            <p>성공적인 마케팅을 위한 전문가의 인사이트를 공유합니다</p>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="blog-main">
+        <div class="blog-container">
+            <!-- 블로그 포스트 목록 -->
+            <div id="blogPosts" class="blog-grid">
+                <!-- 게시글이 여기에 동적으로 로드됩니다 -->
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="pagination">
+                <button id="prevPage" class="pagination-btn" disabled>이전</button>
+                <span id="currentPage" class="current-page">1</span>
+                <button id="nextPage" class="pagination-btn">다음</button>
+            </div>
+
+            <!-- 글쓰기 버튼 (관리자만 보임) -->
+            <div id="writeButtonContainer" class="write-button-container" style="display: none;">
+                <button id="writeBtn" class="write-btn">
+                    <i class="fas fa-pen"></i>
+                    글쓰기
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 글쓰기 버튼 -->
+    <button id="writeButton" onclick="goToWrite()" title="새 글 작성">
+        <i class="fas fa-pen"></i>
+    </button>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    
+    <!-- 앱 스크립트 -->
+    <script src="firebase-config.js"></script>
+    <script src="blog.js"></script>
+</body>
+</html> 
