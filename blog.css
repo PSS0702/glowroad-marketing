@@ -114,6 +114,7 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    position: relative;
 }
 
 .blog-post:hover {
@@ -349,71 +350,107 @@
     border-color: var(--primary-blue);
 }
 
-/* 에디터 툴바 */
-.editor-toolbar {
-    padding: 15px 25px;
-    background: #f8f9fa;
-    border: 1px solid #eee;
-    border-bottom: none;
-    border-radius: 8px 8px 0 0;
+/* 에디터 스타일 */
+.toolbar {
     display: flex;
-    gap: 12px;
+    gap: 8px;
+    padding: 12px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
     flex-wrap: wrap;
-    width: 100%;
-    max-width: 1400px;
-    margin: 20px auto;
-    box-sizing: border-box;
+    position: sticky;
+    top: 70px;
+    z-index: 100;
 }
 
-.editor-toolbar button {
-    padding: 12px 18px;
-    background: white;
-    border: 1px solid #eee;
-    border-radius: 6px;
+.toolbar button {
+    padding: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
     cursor: pointer;
-    color: var(--text-dark);
-    font-size: var(--font-size-base);
+    color: #333;
     transition: all 0.2s ease;
-    min-width: 80px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.editor-toolbar button:hover {
+.toolbar button:hover {
+    background: #f0f0f0;
+    border-color: #999;
+}
+
+.toolbar button.active {
     background: var(--primary-blue);
     color: white;
     border-color: var(--primary-blue);
 }
 
-/* 에디터 본문 */
 .editor-content {
-    min-height: calc(100vh - 400px);
-    padding: 40px;
-    border: 1px solid #eee;
+    min-height: 500px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
     border-radius: 0 0 8px 8px;
-    background: white;
-    font-size: var(--font-size-base);
-    line-height: 1.8;
+    background: #fff;
+    font-size: 16px;
+    line-height: 1.6;
     outline: none;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto 20px;
-    box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .editor-content:focus {
     border-color: var(--primary-blue);
 }
 
+.editor-content h2 {
+    font-size: 24px;
+    margin: 24px 0 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.editor-content h3 {
+    font-size: 20px;
+    margin: 20px 0 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.editor-content p {
+    margin: 0 0 16px;
+    color: var(--text-dark);
+}
+
 .editor-content img {
     max-width: 100%;
     height: auto;
-    margin: 10px 0;
+    margin: 16px 0;
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: block;
 }
 
-.editor-content video {
-    max-width: 100%;
-    margin: 10px 0;
-    border-radius: 8px;
+.editor-content ul, .editor-content ol {
+    margin: 16px 0;
+    padding-left: 24px;
+    color: var(--text-dark);
+}
+
+.editor-content li {
+    margin: 8px 0;
+}
+
+.editor-content a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.editor-content a:hover {
+    text-decoration: underline;
 }
 
 /* 태그 입력 */
@@ -438,41 +475,32 @@
 /* 썸네일 업로드 */
 .thumbnail-label {
     display: block;
+    margin: 24px 0;
     cursor: pointer;
 }
 
 .thumbnail-preview {
     width: 100%;
-    max-width: 1400px;
-    height: 300px;
-    border: 2px dashed #eee;
+    height: 200px;
+    border: 2px dashed #ddd;
     border-radius: 8px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    color: var(--text-gray);
-    transition: all 0.3s ease;
-    background: white;
-    margin: 0 auto;
-    box-sizing: border-box;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+    overflow: hidden;
 }
 
 .thumbnail-preview:hover {
     border-color: var(--primary-blue);
-    color: var(--primary-blue);
+    background: #f0f7ff;
 }
 
 .thumbnail-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.thumbnail-preview i {
-    font-size: 40px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 /* 폼 액션 버튼 */
@@ -660,119 +688,99 @@
 .toolbar {
     display: flex;
     gap: 8px;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 24px;
+    padding: 12px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
     flex-wrap: wrap;
 }
 
 .toolbar button {
-    padding: 8px 16px;
+    padding: 8px;
     border: 1px solid #ddd;
     background: #fff;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
     color: #333;
     transition: all 0.2s ease;
-}
-
-.toolbar button:hover {
-    background: #f5f5f5;
-    border-color: #ccc;
-}
-
-/* 에디터 본문 스타일 */
-.editor-content {
-    min-height: 500px;
-    padding: 20px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    margin-bottom: 24px;
-    outline: none;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* 썸네일 업로드 스타일 */
-.thumbnail-label {
-    display: block;
-    margin-bottom: 24px;
-    cursor: pointer;
-}
-
-.thumbnail-preview {
-    width: 100%;
-    height: 200px;
-    border: 2px dashed #ddd;
-    border-radius: 8px;
+    min-width: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f9f9f9;
-    transition: all 0.2s ease;
 }
 
-.thumbnail-preview:hover {
-    border-color: var(--primary-blue);
-    background: #f0f7ff;
+.toolbar button:hover {
+    background: #f0f0f0;
+    border-color: #999;
 }
 
-.thumbnail-preview img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-/* 버튼 스타일 */
-.write-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    margin-top: 24px;
-}
-
-.cancel-btn, .submit-btn {
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.cancel-btn {
-    background: #fff;
-    border: 1px solid #ddd;
-    color: #666;
-}
-
-.cancel-btn:hover {
-    background: #f5f5f5;
-    border-color: #ccc;
-}
-
-.submit-btn {
+.toolbar button.active {
     background: var(--primary-blue);
-    border: none;
-    color: #fff;
+    color: white;
+    border-color: var(--primary-blue);
 }
 
-.submit-btn:hover {
-    background: #1a4ba8;
+.editor-content {
+    min-height: 500px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background: #fff;
+    font-size: 16px;
+    line-height: 1.6;
+    outline: none;
 }
 
-/* 로딩 인디케이터 스타일 */
+.editor-content:focus {
+    border-color: var(--primary-blue);
+}
+
+.editor-content h2 {
+    font-size: 24px;
+    margin: 24px 0 16px;
+    font-weight: 600;
+}
+
+.editor-content h3 {
+    font-size: 20px;
+    margin: 20px 0 12px;
+    font-weight: 600;
+}
+
+.editor-content p {
+    margin: 0 0 16px;
+}
+
+.editor-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editor-content ul, .editor-content ol {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.editor-content li {
+    margin: 8px 0;
+}
+
+/* 로딩 인디케이터 */
 #loadingIndicator {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    color: white;
     padding: 16px 32px;
     border-radius: 8px;
     z-index: 1000;
+    display: none;
 }
 
 /* 관리자 액션 버튼 */
@@ -847,40 +855,36 @@
     }
 }
 
-/* 글쓰기 버튼 */
+/* 글쓰기 버튼 컨테이너 */
 .write-button-container {
-    display: flex;
+    display: none;
     justify-content: flex-end;
-    margin-top: 30px;
+    margin-top: 2rem;
+    padding: 0 1rem;
 }
 
+/* 글쓰기 버튼 */
 .write-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: var(--primary-blue);
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
+    transition: background-color 0.2s ease;
 }
 
 .write-btn:hover {
-    background: #1a4ba8;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
-    .write-btn {
-        padding: 10px 20px;
-        font-size: var(--font-size-sm);
-    }
+.write-btn i {
+    font-size: 1rem;
 }
 
 /* 메시지 스타일 */
@@ -896,4 +900,707 @@
     padding-top: 70px;
     min-height: 100vh;
     background: #f8f9fa;
+}
+
+/* CKEditor 스타일 */
+.ck-editor__editable {
+    min-height: 500px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.ck-editor__editable img {
+    max-width: 100%;
+    height: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ck-editor__editable h2 {
+    font-size: 24px;
+    margin: 24px 0 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.ck-editor__editable h3 {
+    font-size: 20px;
+    margin: 20px 0 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.ck-editor__editable p {
+    margin: 0 0 16px;
+    color: var(--text-dark);
+}
+
+.ck-editor__editable ul, .ck-editor__editable ol {
+    margin: 16px 0;
+    padding-left: 24px;
+    color: var(--text-dark);
+}
+
+.ck-editor__editable li {
+    margin: 8px 0;
+}
+
+.ck-editor__editable a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.ck-editor__editable a:hover {
+    text-decoration: underline;
+}
+
+.ck-editor__editable blockquote {
+    border-left: 4px solid var(--primary-blue);
+    margin: 16px 0;
+    padding: 0 16px;
+    color: var(--text-gray);
+}
+
+.ck-editor__editable table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.ck-editor__editable table td,
+.ck-editor__editable table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.ck-editor__editable table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* 에디터 컨테이너 스타일 */
+.editor-container {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.editor-container .ck-editor__editable {
+    min-height: 500px;
+    padding: 20px;
+}
+
+.editor-container .ck-editor__editable:focus {
+    outline: none;
+}
+
+.editor-container .ck-editor__editable img {
+    max-width: 100%;
+    height: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editor-container .ck-editor__editable h2 {
+    font-size: 24px;
+    margin: 24px 0 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.editor-container .ck-editor__editable h3 {
+    font-size: 20px;
+    margin: 20px 0 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.editor-container .ck-editor__editable p {
+    margin: 0 0 16px;
+    color: var(--text-dark);
+}
+
+.editor-container .ck-editor__editable ul, 
+.editor-container .ck-editor__editable ol {
+    margin: 16px 0;
+    padding-left: 24px;
+    color: var(--text-dark);
+}
+
+.editor-container .ck-editor__editable li {
+    margin: 8px 0;
+}
+
+.editor-container .ck-editor__editable a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.editor-container .ck-editor__editable a:hover {
+    text-decoration: underline;
+}
+
+.editor-container .ck-editor__editable blockquote {
+    border-left: 4px solid var(--primary-blue);
+    margin: 16px 0;
+    padding: 0 16px;
+    color: var(--text-gray);
+}
+
+.editor-container .ck-editor__editable table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.editor-container .ck-editor__editable table td,
+.editor-container .ck-editor__editable table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.editor-container .ck-editor__editable table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* 글 삭제 버튼 */
+.delete-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.delete-btn:hover {
+    color: #c82333;
+}
+
+/* 모달 스타일 */
+.post-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--text-dark);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-meta {
+    margin-bottom: 20px;
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+.modal-meta span {
+    margin-right: 15px;
+}
+
+.modal-body {
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+}
+
+/* 로딩 인디케이터 */
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loadingIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#loadingIndicator span {
+    margin-left: 10px;
+    color: var(--text-gray);
+}
+
+/* Summernote 에디터 스타일 개선 */
+.note-editor.note-frame {
+    border: 1px solid #ddd !important;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.note-editor.note-frame .note-editing-area {
+    background: #fff;
+    min-height: 500px;
+}
+
+.note-editor.note-frame .note-statusbar {
+    background: #f8f9fa;
+}
+
+.note-editor .note-toolbar {
+    background: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+}
+
+.note-editor .note-toolbar .note-btn-group {
+    margin: 5px;
+}
+
+.note-editor .note-toolbar .note-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    border-radius: 4px;
+    margin: 2px;
+    min-width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-editor .note-toolbar .note-btn:hover {
+    background: #f0f0f0;
+    border-color: #999;
+}
+
+.note-editor .note-toolbar .note-btn.active {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.note-editor .note-editing-area .note-editable {
+    background: #fff;
+    color: var(--text-dark);
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 500px;
+}
+
+.note-editor .note-editing-area .note-editable p {
+    margin: 0 0 16px;
+}
+
+.note-editor .note-editing-area .note-editable h1,
+.note-editor .note-editing-area .note-editable h2,
+.note-editor .note-editing-area .note-editable h3 {
+    margin: 24px 0 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.note-editor .note-editing-area .note-editable h1 { font-size: 32px; }
+.note-editor .note-editing-area .note-editable h2 { font-size: 28px; }
+.note-editor .note-editing-area .note-editable h3 { font-size: 24px; }
+
+.note-editor .note-editing-area .note-editable img {
+    max-width: 100%;
+    height: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.note-editor .note-editing-area .note-editable ul,
+.note-editor .note-editing-area .note-editable ol {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.note-editor .note-editing-area .note-editable li {
+    margin: 8px 0;
+}
+
+.note-editor .note-editing-area .note-editable table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.note-editor .note-editing-area .note-editable table td,
+.note-editor .note-editing-area .note-editable table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.note-editor .note-editing-area .note-editable table th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+/* 드롭다운 메뉴 스타일 */
+.note-editor .note-dropdown-menu {
+    min-width: 160px;
+    padding: 8px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.note-editor .note-dropdown-menu .note-dropdown-item {
+    padding: 8px 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+.note-editor .note-dropdown-menu .note-dropdown-item:hover {
+    background: #f8f9fa;
+}
+
+/* 컬러 팔레트 스타일 */
+.note-editor .note-color-palette {
+    padding: 8px;
+}
+
+.note-editor .note-color-row .note-color-btn {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+/* 전체 화면 모드 */
+.note-editor.note-frame.fullscreen {
+    background: #fff;
+}
+
+.note-editor.note-frame.fullscreen .note-editable {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .note-editor .note-toolbar {
+        padding: 8px;
+    }
+
+    .note-editor .note-toolbar .note-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        min-width: 32px;
+        height: 32px;
+    }
+
+    .note-editor .note-editing-area .note-editable {
+        padding: 15px;
+        font-size: 14px;
+    }
+}
+
+/* Write Page Styles */
+.write-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.write-header {
+    margin-bottom: 20px;
+}
+
+.write-header input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Summernote Editor Styles */
+.note-editor.note-frame {
+    border: 1px solid #ddd !important;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.note-toolbar {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #ddd !important;
+    padding: 10px !important;
+}
+
+.note-btn {
+    background-color: #fff !important;
+    border: 1px solid #ddd !important;
+    padding: 5px 10px !important;
+    margin: 2px !important;
+    border-radius: 4px !important;
+}
+
+.note-btn:hover {
+    background-color: #f0f0f0 !important;
+}
+
+.note-editing-area {
+    background-color: #fff;
+    min-height: 400px;
+}
+
+.note-editable {
+    padding: 20px !important;
+    font-family: 'Noto Sans KR', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+}
+
+.note-status-output {
+    height: 25px !important;
+}
+
+.note-statusbar {
+    background-color: #f8f9fa !important;
+    border-top: 1px solid #ddd !important;
+}
+
+.note-resizebar {
+    height: 10px !important;
+}
+
+/* Thumbnail Upload Styles */
+.thumbnail-section {
+    margin: 20px 0;
+    padding: 20px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.thumbnail-preview {
+    margin-top: 15px;
+    min-height: 100px;
+}
+
+.thumbnail-preview img {
+    max-width: 300px;
+    max-height: 200px;
+    object-fit: contain;
+}
+
+/* Action Buttons */
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.cancel-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #545b62;
+}
+
+/* Loading Indicator */
+#loadingIndicator {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .write-container {
+        padding: 10px;
+    }
+
+    .note-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .note-btn {
+        padding: 4px 8px !important;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+}
+
+.admin-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.write-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.write-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.post:hover .delete-button {
+    opacity: 1;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
 } 

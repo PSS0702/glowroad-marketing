@@ -1,22 +1,28 @@
 // Firebase 구성
 const firebaseConfig = {
     apiKey: "AIzaSyDNc6JOcNRhIiqA15p1G620jzfzYNeP5lg",
-    authDomain: "project-591930729518.firebaseapp.com",
-    projectId: "project-591930729518",
-    storageBucket: "project-591930729518.appspot.com",
+    authDomain: "glowroadad.firebaseapp.com",
+    projectId: "glowroadad",
+    storageBucket: "glowroadad.appspot.com",
     messagingSenderId: "591930729518",
-    appId: "1:591930729518:web:glowroadad"
+    appId: "1:591930729518:web:5531dbdbce142ce86f2bbf",
+    measurementId: "G-PX3RYSX2LN"
 };
 
 // Firebase 초기화
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 
-// Firebase 서비스 초기화
-const auth = firebase.auth();
-const db = firebase.firestore();
+// Storage 초기화 및 설정
 const storage = firebase.storage();
+const firestore = firebase.firestore();
 
-// Firebase 서비스 내보내기
-window.auth = auth;
-window.db = db;
-window.storage = storage; 
+// Storage 설정
+const storageRef = storage.ref();
+
+// 전역 객체에 할당
+window.firebaseConfig = firebaseConfig;
+window.storage = storage;
+window.firestore = firestore;
+window.storageRef = storageRef; 

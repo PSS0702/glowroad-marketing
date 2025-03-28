@@ -320,9 +320,6 @@ style.textContent = `
 document.head.appendChild(style);
 
 // DOM 요소
-const adminLoginBtn = document.getElementById('adminLoginBtn');
-const loginModal = document.getElementById('loginModal');
-const loginForm = document.getElementById('loginForm');
 const writeButtonContainer = document.getElementById('writeButtonContainer');
 const writeBtn = document.getElementById('writeBtn');
 const blogPosts = document.getElementById('blogPosts');
@@ -331,71 +328,244 @@ const nextPageBtn = document.getElementById('nextPage');
 const currentPageSpan = document.getElementById('currentPage');
 
 // 전역 변수
-let isAdmin = false;
 let currentPage = 1;
 const postsPerPage = 9;
 let totalPosts = 0;
 
-// 초기 상태 설정
-function updateAdminUI() {
-    if (isAdmin) {
-        adminLoginBtn.textContent = '로그아웃';
-        writeButtonContainer.style.display = 'flex';
-    } else {
-        adminLoginBtn.textContent = '관리자 로그인';
-        writeButtonContainer.style.display = 'none';
-    }
-}
+// Firebase 인스턴스
+let firestore;
+let storage;
 
-// 게시글 로드 함수
-async function loadPosts() {
+// Firebase 초기화 함수
+async function initializeFirebase() {
     try {
-        const snapshot = await db.collection('posts').orderBy('createdAt', 'desc').get();
-        totalPosts = snapshot.docs.length;
-        displayPosts(snapshot.docs);
-        updatePagination();
+        if (firebase.apps.length === 0) {
+            firebase.initializeApp(window.firebaseConfig);
+        }
+        firestore = firebase.firestore();
+        storage = firebase.storage();
+        console.log('Firebase 초기화 완료');
+        return true;
     } catch (error) {
-        console.error('게시글 로드 에러:', error);
-        blogPosts.innerHTML = '<div class="error-message">게시글을 불러오는데 실패했습니다.</div>';
+        console.error('Firebase 초기화 실패:', error);
+        return false;
     }
 }
 
-// 게시글 표시 함수
-function displayPosts(posts) {
-    const start = (currentPage - 1) * postsPerPage;
-    const end = start + postsPerPage;
-    const currentPosts = posts.slice(start, end);
+// 어드민 체크 함수
+async function checkAdmin() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('admin') === 'true';
+}
 
-    if (currentPosts.length === 0) {
-        blogPosts.innerHTML = '<div class="no-posts">등록된 게시글이 없습니다.</div>';
-        return;
+// 글쓰기 페이지로 이동
+function goToWrite() {
+    console.log('글쓰기 페이지로 이동');
+    window.location.href = 'write.html?admin=true';
+}
+
+// 글쓰기 버튼 표시/숨김 함수
+function toggleWriteButton(show) {
+    console.log('글쓰기 버튼 표시:', show); // 디버깅용 로그
+    if (writeButtonContainer) {
+        writeButtonContainer.style.display = show ? 'flex' : 'none';
+    } else {
+        console.error('writeButtonContainer를 찾을 수 없습니다.'); // 디버깅용 로그
     }
+}
 
-    blogPosts.innerHTML = currentPosts.map(doc => {
-        const post = doc.data();
-        return `
-            <div class="blog-post">
+// 글쓰기 버튼 클릭 핸들러
+function handleWriteClick() {
+    window.location.href = 'write.html?admin=true';
+}
+
+// 초기화 함수
+async function init() {
+    try {
+        console.log('초기화 시작'); // 디버깅용 로그
+        
+        // Firebase 초기화
+        await initializeFirebase();
+        
+        // 관리자 체크 및 UI 업데이트
+        const isAdmin = await checkAdmin();
+        
+        // 글쓰기 버튼 이벤트 리스너 등록
+        if (writeBtn) {
+            writeBtn.addEventListener('click', handleWriteClick);
+            console.log('글쓰기 버튼 이벤트 리스너 등록됨'); // 디버깅용 로그
+        } else {
+            console.error('writeBtn을 찾을 수 없습니다.'); // 디버깅용 로그
+        }
+        
+        // 게시글 로드
+        await loadPosts();
+        console.log('초기화 완료'); // 디버깅용 로그
+        
+    } catch (error) {
+        console.error('초기화 실패:', error);
+    }
+}
+
+// 모달 외부 클릭 시 닫기
+window.onclick = function(event) {
+    if (event.target === loginModal) {
+        loginModal.style.display = 'none';
+    }
+};
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', init);
+
+// 게시글 삭제 함수
+async function deletePost(postId) {
+    try {
+        if (!await checkAdmin()) {
+            alert('관리자만 삭제할 수 있습니다.');
+            return;
+        }
+
+        if (!confirm('정말 이 게시글을 삭제하시겠습니까?')) {
+            return;
+        }
+
+        await firestore.collection('posts').doc(postId).delete();
+        alert('게시글이 삭제되었습니다.');
+        location.reload();
+    } catch (error) {
+        console.error('게시글 삭제 실패:', error);
+        alert('게시글 삭제에 실패했습니다.');
+    }
+}
+
+// 게시글 목록 표시 함수
+async function displayPosts() {
+    try {
+        const isAdmin = await checkAdmin();
+        const postsRef = firestore.collection('posts');
+        const snapshot = await postsRef.orderBy('createdAt', 'desc').get();
+        const postsContainer = document.getElementById('posts');
+        postsContainer.innerHTML = '';
+
+        // 어드민일 경우 글쓰기 버튼 추가
+        if (isAdmin) {
+            const writeButton = document.createElement('button');
+            writeButton.textContent = '글쓰기';
+            writeButton.className = 'write-button';
+            writeButton.onclick = () => location.href = 'write.html?admin=true';
+            document.querySelector('.container').insertBefore(writeButton, postsContainer);
+        }
+
+        snapshot.forEach(doc => {
+            const post = doc.data();
+            const article = document.createElement('article');
+            article.className = 'post';
+            article.onclick = () => location.href = `post.html?id=${doc.id}${isAdmin ? '&admin=true' : ''}`;
+
+            const html = `
                 <div class="post-thumbnail">
-                    <img src="${post.thumbnail || 'images/default-thumbnail.jpg'}" alt="${post.title}">
+                    <img src="${post.thumbnail || 'default-thumbnail.jpg'}" alt="썸네일">
                 </div>
                 <div class="post-content">
-                    <h2 class="post-title">${post.title}</h2>
-                    <p class="post-excerpt">${post.content.substring(0, 100)}...</p>
-                    <div class="post-meta">
-                        <span>${new Date(post.createdAt.toDate()).toLocaleDateString()}</span>
-                    </div>
+                    <h2>${post.title}</h2>
+                    <p class="post-meta">
+                        <span class="author">글로우로드 마케팅</span>
+                        <span class="date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                    </p>
+                    ${isAdmin ? `<button class="delete-button" onclick="event.stopPropagation(); deletePost('${doc.id}')">삭제</button>` : ''}
+                </div>
+            `;
+            article.innerHTML = html;
+            postsContainer.appendChild(article);
+        });
+    } catch (error) {
+        console.error('게시글 목록 로드 실패:', error);
+    }
+}
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', async () => {
+    if (await initializeFirebase()) {
+        displayPosts();
+    }
+});
+
+// 글 상세 보기
+async function showPost(postId) {
+    try {
+        const doc = await firestore.collection('posts').doc(postId).get();
+        if (!doc.exists) {
+            alert('존재하지 않는 글입니다.');
+            return;
+        }
+
+        const data = doc.data();
+        const date = data.createdAt ? new Date(data.createdAt.seconds * 1000) : new Date();
+        const formattedDate = date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        const modal = document.createElement('div');
+        modal.className = 'post-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>${data.title}</h2>
+                    <button class="close-btn" onclick="this.closest('.post-modal').remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-meta">
+                    <span class="post-date">${formattedDate}</span>
+                    <span class="post-author">${data.author || '관리자'}</span>
+                </div>
+                <div class="modal-body">
+                    ${data.content}
                 </div>
             </div>
         `;
-    }).join('');
+
+        document.body.appendChild(modal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+    } catch (error) {
+        console.error('글 로드 중 오류 발생:', error);
+        alert('글을 불러오는데 실패했습니다.');
+    }
 }
 
 // 페이지네이션 업데이트
 function updatePagination() {
     const totalPages = Math.ceil(totalPosts / postsPerPage);
-    currentPageSpan.textContent = currentPage;
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const currentPageSpan = document.getElementById('currentPage');
+    
     prevPageBtn.disabled = currentPage === 1;
     nextPageBtn.disabled = currentPage === totalPages;
+    currentPageSpan.textContent = currentPage;
+}
+
+// 이전 페이지
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        loadPosts();
+    }
+}
+
+// 다음 페이지
+function nextPage() {
+    const totalPages = Math.ceil(totalPosts / postsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        loadPosts();
+    }
 }
 
 // 관리자 UI 표시 여부 확인
@@ -433,18 +603,13 @@ function initializeAdminUI() {
 // 로그인 처리
 async function handleLogin(e) {
     e.preventDefault();
-    
-    if (!shouldShowAdminUI()) {
-        return;
-    }
-
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
-
+    
     try {
         await auth.signInWithEmailAndPassword(email, password);
-        alert('로그인 성공!');
         loginModal.style.display = 'none';
+        alert('로그인되었습니다.');
     } catch (error) {
         console.error('로그인 실패:', error);
         alert('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
@@ -457,7 +622,8 @@ async function handleLogout() {
         await auth.signOut();
         alert('로그아웃되었습니다.');
     } catch (error) {
-        console.error('로그아웃 에러:', error);
+        console.error('로그아웃 실패:', error);
+        alert('로그아웃에 실패했습니다.');
     }
 }
 
@@ -482,6 +648,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (writeBtn) {
         writeBtn.addEventListener('click', handleWriteClick);
     }
+
+    // 페이지네이션 버튼 이벤트 리스너
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    if (prevPageBtn) prevPageBtn.addEventListener('click', prevPage);
+    if (nextPageBtn) nextPageBtn.addEventListener('click', nextPage);
 
     // 모달 닫기 버튼
     const closeModal = document.querySelector('.close-modal');
@@ -527,4 +699,61 @@ window.onclick = function(event) {
     if (event.target === loginModal) {
         loginModal.style.display = 'none';
     }
-}; 
+};
+
+// 글쓰기 버튼 표시 함수
+function showWriteButton() {
+    const writeButtonContainer = document.getElementById('writeButtonContainer');
+    if (writeButtonContainer) {
+        writeButtonContainer.style.display = 'flex';
+    }
+}
+
+// 글쓰기 버튼 클릭 핸들러
+function handleWriteClick() {
+    window.location.href = 'write.html?admin=true';
+}
+
+// 초기화 함수
+async function init() {
+    try {
+        // Firebase 초기화
+        await initializeFirebase();
+        
+        // 인증 상태 관찰자 설정
+        setupAuthStateObserver();
+        
+        // 게시글 로드
+        await loadPosts();
+        
+        // 글쓰기 버튼 이벤트 리스너 등록
+        const writeBtn = document.getElementById('writeBtn');
+        if (writeBtn) {
+            writeBtn.addEventListener('click', handleWriteClick);
+        }
+        
+    } catch (error) {
+        console.error('초기화 실패:', error);
+    }
+}
+
+// 인증 상태 관찰자 설정
+function setupAuthStateObserver() {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // 사용자가 로그인한 경우
+            showWriteButton();
+        } else {
+            // 사용자가 로그아웃한 경우
+            const writeButtonContainer = document.getElementById('writeButtonContainer');
+            if (writeButtonContainer) {
+                writeButtonContainer.style.display = 'none';
+            }
+        }
+    });
+}
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', init);
+
+// ... existing code ... 
