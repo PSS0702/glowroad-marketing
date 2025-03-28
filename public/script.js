@@ -35,25 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth > 768) {
             mobileMenuBtn.classList.remove('active');
             mobileMenu.classList.remove('active');
+            body.classList.remove('menu-open');
         }
     });
 
-    // 이미지 지연 로딩
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    if ('loading' in HTMLImageElement.prototype) {
-        images.forEach(img => {
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-            }
-        });
-    } else {
-        // Fallback for browsers that don't support lazy loading
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-        document.body.appendChild(script);
-    }
-
-    // 스크롤 이벤트 처리
+    // 스크롤 이벤트 처리 (TOP 버튼)
     const topButton = document.querySelector('.top-fixed-btn');
     window.addEventListener('scroll', function() {
         if (window.scrollY > 200) {
@@ -84,29 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     body.classList.remove('menu-open');
                 }
             }
-        });
-    });
-
-    // 포트폴리오 필터링
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // 활성 버튼 스타일 변경
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            const filterValue = button.getAttribute('data-filter');
-
-            // 포트폴리오 아이템 필터링
-            portfolioItems.forEach(item => {
-                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
         });
     });
 });
