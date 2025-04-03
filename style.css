@@ -1105,95 +1105,75 @@ body {
     padding: 8rem 0;
 }
 
-/* 문의하기 섹션 스타일 업데이트 */
+/* 문의하기 섹션 스타일 */
 .contact-section {
-    position: relative;
-    padding: 100px 20px;
-    background: linear-gradient(135deg, var(--primary-blue), #1e4b9f);
-    overflow: hidden;
-}
-
-.contact-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.1;
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    text-align: center;
 }
 
 .contact-content {
-    position: relative;
-    z-index: 2;
     max-width: 800px;
     margin: 0 auto;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 60px 40px;
-    border-radius: 30px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    padding: 0 20px;
 }
 
-.contact-content h2 {
-    font-size: 42px;
+.contact-section h2 {
+    font-size: 3rem;
+    color: #2d3436;
+    margin-bottom: 20px;
     font-weight: 700;
-    margin-bottom: 30px;
-    color: var(--white);
-    line-height: 1.3;
-    letter-spacing: -0.02em;
 }
 
 .contact-description {
-    font-size: var(--font-size-xl);
+    font-size: 1.5rem;
+    color: #636e72;
+    margin-bottom: 40px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 50px;
-    word-break: keep-all;
 }
 
 .contact-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 20px 60px;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--primary-blue);
-    background: var(--white);
-    border-radius: 50px;
+    gap: 10px;
+    padding: 15px 40px;
+    background-color: #00b894;
+    color: white;
     text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.2);
 }
 
 .contact-btn:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
-    background: var(--white);
-    color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+    background-color: #00a187;
 }
 
-.contact-btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.2);
-    opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+.contact-btn i {
+    font-size: 1.1rem;
 }
 
-.contact-btn:hover::after {
-    opacity: 1;
-    transform: scale(1.5);
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    .contact-section h2 {
+        font-size: 2rem;
+    }
+
+    .contact-description {
+        font-size: 1.2rem;
+    }
+
+    .contact-btn {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+    }
 }
 
 /* 문의하기 섹션 모바일 반응형 */
@@ -3790,5 +3770,85 @@ section:nth-child(even) {
         font-size: 16px;
         width: 100%;
         max-width: 260px;
+    }
+}
+
+/* 문의하기 페이지 스타일 */
+.contact-section {
+    padding: 6rem 0;
+    background: #f8f9fa;
+}
+
+.contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.google-form-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
+    overflow: hidden;
+}
+
+.kakao-consult {
+    text-align: center;
+    padding: 3rem;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.kakao-consult h2 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.kakao-consult p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.kakao-consult .kakao-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: #FEE500;
+    color: #000;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.kakao-consult .kakao-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.kakao-consult .kakao-btn i {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 4rem 0;
+    }
+
+    .google-form-container {
+        margin-bottom: 2rem;
+    }
+
+    .kakao-consult {
+        padding: 2rem;
+    }
+
+    .kakao-consult h2 {
+        font-size: 1.5rem;
     }
 }
